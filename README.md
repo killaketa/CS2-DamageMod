@@ -1,6 +1,16 @@
 # CS2 DamageMod
 Modify hitgroups to be enabled/disabled.
 
+## Requirements
+A [CounterStrikeSharp](https://github.com/roflmuffin/CounterStrikeSharp) & [MetaMod:Source](https://www.sourcemm.net/) installation on your server.
+
+## Installation
+1. Download from Releases/Artifacts or compile yourself.
+2. Open root of CS2 installation on server.
+3. Copy DamageMod folder from the zip into `game/csgo/addons/counterstrikesharp/plugins` on server.
+
+## Configuration
+
 Config allows you to enable/disable and change damage multiplier on individual hitgroups.
 ```json
     "HITGROUP_HEAD": {
