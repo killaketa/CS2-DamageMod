@@ -29,7 +29,7 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v5.0.0
       with:
-        path: /
+        path: DamageMod/
         # The desired behavior if no files are found using the provided path.
               
           
