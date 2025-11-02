@@ -31,7 +31,6 @@ public class HitGroups
 public class DamageModConfig : BasePluginConfig
 {
     [JsonPropertyName("Enabled")] public bool Enabled { get; set; } = true;
-    [JsonPropertyName("DamageMultiplier")] public float DamageMultiplier { get; set; } = 1;
     [JsonPropertyName("HitGroups")] public HitGroups HitGroups { get; set; } = new();
 }
 
@@ -62,8 +61,6 @@ public class CDamageMod : BasePlugin, IPluginConfig<DamageModConfig>
 
             if (Config.Enabled)
             {
-                damageInfo.Damage *= Config.DamageMultiplier;
-
                 switch (damageInfo.GetHitGroup())
                 {
                     case HitGroup_t.HITGROUP_CHEST:
