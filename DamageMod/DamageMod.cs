@@ -10,22 +10,28 @@ using CounterStrikeSharp.API.Modules.Memory.DynamicFunctions;
 
 namespace DamageMod;
 
+public class HitgroupInfo
+{
+    [JsonPropertyName("Enabled")] public bool Enabled { get; set; } = true;
+    [JsonPropertyName("DamageMultiplier")] public float DamageMultiplier { get; set; } = 1;
+}
+
 public class HitGroups
 {
-    [JsonPropertyName("HITGROUP_HEAD")] public List<object> HITGROUP_HEAD { get; set; } = [true, 1];
-    [JsonPropertyName("HITGROUP_NECK")] public List<object> HITGROUP_NECK { get; set; } = [true, 1];
-    [JsonPropertyName("HITGROUP_CHEST")] public List<object> HITGROUP_CHEST { get; set; } = [true, 1];
-    [JsonPropertyName("HITGROUP_STOMACH")] public List<object> HITGROUP_STOMACH { get; set; } = [true, 1];
-    [JsonPropertyName("HITGROUP_LEFTARM")] public List<object> HITGROUP_LEFTARM { get; set; } = [true, 1];
-    [JsonPropertyName("HITGROUP_RIGHTARM")] public List<object> HITGROUP_RIGHTARM { get; set; } = [true, 1];
-    [JsonPropertyName("HITGROUP_LEFTLEG")] public List<object> HITGROUP_LEFTLEG { get; set; } = [true, 1];
-    [JsonPropertyName("HITGROUP_RIGHTLEG")] public List<object> HITGROUP_RIGHTLEG { get; set; } = [true, 1];
-    [JsonPropertyName("HITGROUP_GEAR")] public List<object> HITGROUP_GEAR { get; set; } = [true, 1];
-    [JsonPropertyName("HITGROUP_GENERIC")] public List<object> HITGROUP_GENERIC { get; set; } = [true, 1];
-    [JsonPropertyName("HITGROUP_SPECIAL")] public List<object> HITGROUP_SPECIAL { get; set; } = [true, 1];
-    [JsonPropertyName("HITGROUP_UNUSED")] public List<object> HITGROUP_UNUSED { get; set; } = [true, 1];
-    [JsonPropertyName("HITGROUP_INVALID")] public List<object> HITGROUP_INVALID { get; set; } = [true, 1];
-    [JsonPropertyName("HITGROUP_COUNT")] public List<object> HITGROUP_COUNT { get; set; } = [true, 1];
+    [JsonPropertyName("HITGROUP_HEAD")] public HitgroupInfo HITGROUP_HEAD { get; set; } = new();
+    [JsonPropertyName("HITGROUP_NECK")] public HitgroupInfo HITGROUP_NECK { get; set; } = new();
+    [JsonPropertyName("HITGROUP_CHEST")] public HitgroupInfo HITGROUP_CHEST { get; set; } = new();
+    [JsonPropertyName("HITGROUP_STOMACH")] public HitgroupInfo HITGROUP_STOMACH { get; set; } = new();
+    [JsonPropertyName("HITGROUP_LEFTARM")] public HitgroupInfo HITGROUP_LEFTARM { get; set; } = new();
+    [JsonPropertyName("HITGROUP_RIGHTARM")] public HitgroupInfo HITGROUP_RIGHTARM { get; set; } = new();
+    [JsonPropertyName("HITGROUP_LEFTLEG")] public HitgroupInfo HITGROUP_LEFTLEG { get; set; } = new();
+    [JsonPropertyName("HITGROUP_RIGHTLEG")] public HitgroupInfo HITGROUP_RIGHTLEG { get; set; } = new();
+    [JsonPropertyName("HITGROUP_GEAR")] public HitgroupInfo HITGROUP_GEAR { get; set; } = new();
+    [JsonPropertyName("HITGROUP_GENERIC")] public HitgroupInfo HITGROUP_GENERIC { get; set; } = new();
+    [JsonPropertyName("HITGROUP_SPECIAL")] public HitgroupInfo HITGROUP_SPECIAL { get; set; } = new();
+    [JsonPropertyName("HITGROUP_UNUSED")] public HitgroupInfo HITGROUP_UNUSED { get; set; } = new();
+    [JsonPropertyName("HITGROUP_INVALID")] public HitgroupInfo HITGROUP_INVALID { get; set; } = new();
+    [JsonPropertyName("HITGROUP_COUNT")] public HitgroupInfo HITGROUP_COUNT { get; set; } = new();
 }
 
 public class DamageModConfig : BasePluginConfig
@@ -64,46 +70,46 @@ public class CDamageMod : BasePlugin, IPluginConfig<DamageModConfig>
                 switch (damageInfo.GetHitGroup())
                 {
                     case HitGroup_t.HITGROUP_CHEST:
-                        if ((bool)Config.HitGroups.HITGROUP_CHEST[0])       { damageInfo.Damage *= (float)Config.HitGroups.HITGROUP_CHEST[1]; return HookResult.Changed; }
+                        if (Config.HitGroups.HITGROUP_CHEST.Enabled)       { damageInfo.Damage *= Config.HitGroups.HITGROUP_CHEST.DamageMultiplier; return HookResult.Changed; }
                         break;
                     case HitGroup_t.HITGROUP_COUNT:
-                        if ((bool)Config.HitGroups.HITGROUP_COUNT[0])       { damageInfo.Damage *= (float)Config.HitGroups.HITGROUP_COUNT[1];  return HookResult.Changed; }
+                        if (Config.HitGroups.HITGROUP_COUNT.Enabled)       { damageInfo.Damage *= Config.HitGroups.HITGROUP_COUNT.DamageMultiplier;  return HookResult.Changed; }
                         break;
                     case HitGroup_t.HITGROUP_GEAR:
-                        if ((bool)Config.HitGroups.HITGROUP_GEAR[0])        { damageInfo.Damage *= (float)Config.HitGroups.HITGROUP_GEAR[1]; return HookResult.Changed; }
+                        if (Config.HitGroups.HITGROUP_GEAR.Enabled)        { damageInfo.Damage *= Config.HitGroups.HITGROUP_GEAR.DamageMultiplier; return HookResult.Changed; }
                         break;
                     case HitGroup_t.HITGROUP_GENERIC:
-                        if ((bool)Config.HitGroups.HITGROUP_GENERIC[0])     { damageInfo.Damage *= (float)Config.HitGroups.HITGROUP_GENERIC[1];  return HookResult.Changed; }
+                        if (Config.HitGroups.HITGROUP_GENERIC.Enabled)     { damageInfo.Damage *= Config.HitGroups.HITGROUP_GENERIC.DamageMultiplier;  return HookResult.Changed; }
                         break;
                     case HitGroup_t.HITGROUP_HEAD:
-                        if ((bool)Config.HitGroups.HITGROUP_HEAD[0])        { damageInfo.Damage *= (float)Config.HitGroups.HITGROUP_HEAD[1]; return HookResult.Changed; }
+                        if (Config.HitGroups.HITGROUP_HEAD.Enabled)        { damageInfo.Damage *= Config.HitGroups.HITGROUP_HEAD.DamageMultiplier; return HookResult.Changed; }
                         break;
                     case HitGroup_t.HITGROUP_INVALID:
-                        if ((bool)Config.HitGroups.HITGROUP_INVALID[0])     { damageInfo.Damage *= (float)Config.HitGroups.HITGROUP_INVALID[1];  return HookResult.Changed; }
+                        if (Config.HitGroups.HITGROUP_INVALID.Enabled)     { damageInfo.Damage *= Config.HitGroups.HITGROUP_INVALID.DamageMultiplier;  return HookResult.Changed; }
                         break;
                     case HitGroup_t.HITGROUP_LEFTARM:
-                        if ((bool)Config.HitGroups.HITGROUP_LEFTARM[0])     { damageInfo.Damage *= (float)Config.HitGroups.HITGROUP_LEFTARM[1];  return HookResult.Changed; }
+                        if (Config.HitGroups.HITGROUP_LEFTARM.Enabled)     { damageInfo.Damage *= Config.HitGroups.HITGROUP_LEFTARM.DamageMultiplier;  return HookResult.Changed; }
                         break;
                     case HitGroup_t.HITGROUP_LEFTLEG:
-                        if ((bool)Config.HitGroups.HITGROUP_LEFTLEG[0])     { damageInfo.Damage *= (float)Config.HitGroups.HITGROUP_LEFTLEG[1]; return HookResult.Changed; }
+                        if (Config.HitGroups.HITGROUP_LEFTLEG.Enabled)     { damageInfo.Damage *= Config.HitGroups.HITGROUP_LEFTLEG.DamageMultiplier; return HookResult.Changed; }
                         break;
                     case HitGroup_t.HITGROUP_NECK:
-                        if ((bool)Config.HitGroups.HITGROUP_NECK[0])        { damageInfo.Damage *= (float)Config.HitGroups.HITGROUP_NECK[1]; return HookResult.Changed; }
+                        if (Config.HitGroups.HITGROUP_NECK.Enabled)        { damageInfo.Damage *= Config.HitGroups.HITGROUP_NECK.DamageMultiplier; return HookResult.Changed; }
                         break;
                     case HitGroup_t.HITGROUP_RIGHTARM:
-                        if ((bool)Config.HitGroups.HITGROUP_RIGHTARM[0])    { damageInfo.Damage *= (float)Config.HitGroups.HITGROUP_RIGHTARM[1]; return HookResult.Changed; }
+                        if (Config.HitGroups.HITGROUP_RIGHTARM.Enabled)    { damageInfo.Damage *= Config.HitGroups.HITGROUP_RIGHTARM.DamageMultiplier; return HookResult.Changed; }
                         break;
                     case HitGroup_t.HITGROUP_RIGHTLEG:
-                        if ((bool)Config.HitGroups.HITGROUP_RIGHTLEG[0])    { damageInfo.Damage *= (float)Config.HitGroups.HITGROUP_RIGHTLEG[1]; return HookResult.Changed; }
+                        if (Config.HitGroups.HITGROUP_RIGHTLEG.Enabled)    { damageInfo.Damage *= Config.HitGroups.HITGROUP_RIGHTLEG.DamageMultiplier; return HookResult.Changed; }
                         break;
                     case HitGroup_t.HITGROUP_SPECIAL:
-                        if ((bool)Config.HitGroups.HITGROUP_SPECIAL[0])     { damageInfo.Damage *= (float)Config.HitGroups.HITGROUP_SPECIAL[1]; return HookResult.Changed; }
+                        if (Config.HitGroups.HITGROUP_SPECIAL.Enabled)     { damageInfo.Damage *= Config.HitGroups.HITGROUP_SPECIAL.DamageMultiplier; return HookResult.Changed; }
                         break;
                     case HitGroup_t.HITGROUP_STOMACH:
-                        if ((bool)Config.HitGroups.HITGROUP_STOMACH[0])     { damageInfo.Damage *= (float)Config.HitGroups.HITGROUP_STOMACH[1]; return HookResult.Changed; }
+                        if (Config.HitGroups.HITGROUP_STOMACH.Enabled)     { damageInfo.Damage *= Config.HitGroups.HITGROUP_STOMACH.DamageMultiplier; return HookResult.Changed; }
                         break;
                     case HitGroup_t.HITGROUP_UNUSED:
-                        if ((bool)Config.HitGroups.HITGROUP_UNUSED[0])      { damageInfo.Damage *= (float)Config.HitGroups.HITGROUP_UNUSED[1];  return HookResult.Changed; }
+                        if (Config.HitGroups.HITGROUP_UNUSED.Enabled)      { damageInfo.Damage *= Config.HitGroups.HITGROUP_UNUSED.DamageMultiplier;  return HookResult.Changed; }
                         break;
                 }
 
