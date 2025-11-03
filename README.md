@@ -24,3 +24,18 @@ Config allows you to enable/disable and change damage multiplier on individual h
 ```
 This modifies allows damage to the head hitgroup & multipies all damage to the head hitgroup by 0.25 (divided by 4).\
 It also disables the chest hitgroup, disabling all damage to the chest even though the multiplier is 1.
+
+## Hitgroup Meanings
+
+| Hitgroup | Meaning |
+| --- | --- |
+| HITGROUP_GENERIC | Knife Damage (Also triggers when shooting a wall or prop like glass) |
+| HITGROUP_INVALID | Fall Damage (Potentially hazards too) |
+| HITGROUP_HEAD & HITGROUP_NECK | Headshot Damage |
+| HITGROUP_CHEST | Upper Chest Damage |
+| HITGROUP_STOMACH | Lower Chest Damage |
+| HITGROUP_RIGHTARM & HITGROUP_LEFTARM | Right/Left Arm Damage |
+| HITGROUP_RIGHTLEG & HITGROUP_LEFTLEG | Right/Left Leg Damage |
+| HITGROUP_GEAR, HITGROUP_COUNT, HITGROUP_SPECIAL, & HITGROUP_UNUSED | Unknown/Unused(?) |
+
+If you find anything wrong with these descriptions or the plugin feel free to open a pull request or issue.
