@@ -119,10 +119,5 @@ public class CDamageMod : BasePlugin, IPluginConfig<DamageModConfig>
 
             return HookResult.Continue;
         }, HookMode.Pre);
-
-        RegisterEventHandler<EventBulletFlightResolution>((evt, info) =>
-        {
-            return HookResult.Continue;
-        });
     }
 }
